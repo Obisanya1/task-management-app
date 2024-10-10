@@ -3,25 +3,39 @@
 import { useState, useEffect } from "react";
 import { Task } from "@/types/tasks";
 import { getTasks, addTask, updateTask, deleteTask } from "@/services/api";
+import AddTaskForm from "../ui/taskform";
 
 export default function TaskList() {
 const [tasks, setTasks] = useState<Task[]>([]);
+const [showTasks, setShowTasks] = useState(false);
 
-  useEffect (() => {
-    async function fetchTasks() {
-      const tasks = await getTasks();
-      setTasks(tasks);
+const taskLimit = 10;
+
+const handleShowTasks = async () => {
+    try {
+      const taskList = await getTasks(); // Fetch tasks from the API
+      setTasks(taskList.slice(0, taskLimit)); // Set the tasks in the state
+      setShowTasks(!showTasks); // Show the tasks after they are fetched
+    } catch (error) {
+      console.error('Error fetching tasks:', error); // Handle errors
     }
-    fetchTasks();
-    console.log(tasks);
-  })
+  }; 
+  
+   // Function to handle adding a new task to the list
+   const handleTaskAdded = (newTask: Task) => {
+    setTasks([newTask, ...tasks]); // Add the new task to the top of the task list
+  };
 
   return <>
-<h2> All Tasks</h2>
+<main className="flex flex-col gap-5 justify-center items-center">
+<div className="flex flex-row gap-5 mt-5" >
+<button onClick={handleShowTasks} className="bg-blue-950 text-white rounded-sm p-5">Show Tasks</button>
+<button className="bg-blue-950 text-white rounded-sm p-5"><AddTaskForm onTaskAdded={handleTaskAdded}/> </button>
+</div>
 {tasks.length > 0 ? (
-        <ul>
+        <ul className="flex flex-row gap-3 flex-wrap">
           {tasks.map(task => (
-            <li key={task.id} className="bg-blue-100 mt-5 flex p-5 w-fit">
+            <li key={task.id} className="bg-blue-100 mt-5 p-5 w-fit flex flex-row">
               {task.title} - {task.completed ? 'Completed' : 'Incomplete'}
             </li>
           ))}
@@ -29,5 +43,6 @@ const [tasks, setTasks] = useState<Task[]>([]);
       ) : (
         <p>No tasks available</p>
       )}
+      </main>
   </>;
 }
