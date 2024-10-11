@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { updateTask } from '@/services/api';// Import the Task interface
 import { Task } from '@/types/tasks';
 

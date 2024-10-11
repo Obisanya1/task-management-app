@@ -32,7 +32,7 @@ export default function AddTaskForm({ onTaskAdded }: AddTaskFormProps) {
   return (
     <form onSubmit={handleAddTask}>
       {/* Input for task title */}
-      <div>
+      <div className='flex flex-row gap-3 items-center'>
         <label>Task Title:</label>
         <input
           type="text"
@@ -40,6 +40,7 @@ export default function AddTaskForm({ onTaskAdded }: AddTaskFormProps) {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter new task title"
           disabled={isSubmitting}
+          className='text-black border-black p-2 rounded-sm'
         />
       </div>
 
@@ -57,7 +58,7 @@ export default function AddTaskForm({ onTaskAdded }: AddTaskFormProps) {
       </div>
 
       {/* Submit button */}
-      <button type="submit" disabled={isSubmitting}>
+      <button type="submit" disabled={isSubmitting} className='bg-white text-black p-2 font-semibold rounded-sm'>
         {isSubmitting ? 'Adding...' : 'Add Task'}
       </button>
     </form>

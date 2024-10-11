@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Task } from "@/types/tasks";
-import { getTasks, addTask, updateTask, deleteTask } from "@/services/api";
+import { getTasks } from "@/services/api";
 import AddTaskForm from "../ui/taskform";
 import EditTaskForm from "../ui/edittaskform";
 
