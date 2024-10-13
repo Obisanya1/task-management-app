@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Task Management App
+This is a simple task management application built using Next.js and TypeScript. Users can view, add, edit, and delete tasks. The app integrates with the JSONPlaceholder API and uses localStorage to persist tasks across page reloads.
 
-## Getting Started
+Features
+View a list of tasks.
+Add new tasks with a title and completion status.
+Edit existing tasks (update title and status).
+Delete tasks.
+Persist tasks using localStorage.
+Toggle visibility of tasks using a "Show/Hide Tasks" button.
+Technologies Used
+Next.js: React-based framework for server-side rendering.
+TypeScript: For type safety and better code quality.
+JSONPlaceholder API: Mock API for task data.
+React Hooks: Used for state and side effects (useState, useEffect).
+localStorage: To save tasks across reloads.
+Installation and Setup
+Follow these steps to run the project on your local machine:
 
-First, run the development server:
+Clone the Repository:
 
-```bash
+bash
+Copy code
+git clone <repository-url>
+cd task-management-app
+Install Dependencies:
+
+bash
+Copy code
+npm install
+Start the Development Server:
+
+bash
+Copy code
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open the Application in Your Browser: Go to http://localhost:3000 in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Folder Structure
+bash
+Copy code
+/task-management-app
+│
+├── /components
+│   ├── AddTaskForm.tsx      # Component for adding tasks
+│   ├── EditTaskForm.tsx     # Component for editing tasks
+│   └── TaskList.tsx         # Main task management logic
+│
+├── /services
+│   └── api.ts               # API functions to fetch tasks
+│
+├── /types
+│   └── task.ts              # TypeScript interface for Task objects
+│
+├── /pages
+│   ├── index.tsx            # Entry point of the app
+│
+├── public/
+│
+└── README.md                # Documentation
+JSONPlaceholder API Endpoints Used
+GET /todos: Retrieve tasks
+Example: https://jsonplaceholder.typicode.com/todos
+POST /todos: Add new task (mock response)
+PUT /todos/
+: Update task (mock response)
+DELETE /todos/
+: Delete task (mock response)
+Usage
+Add a Task:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Use the input form to add a new task.
+Specify the title and whether the task is completed or not.
+The task will appear in the task list and persist in localStorage.
+View Tasks:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Click the "Show Tasks" button to reveal all available tasks (limited to 10).
+Click "Hide Tasks" to hide the list.
+Edit a Task:
 
-## Learn More
+Click the "Update Task" button next to a task to open the edit form.
+Modify the title or status and save the changes.
+Delete a Task:
 
-To learn more about Next.js, take a look at the following resources:
+Use the "Delete Task" button to remove a task from the list.
+Changes will be reflected in localStorage as well.
+Code Snippets
+API Service Example (/services/api.ts):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ts
+Copy code
+export const getTasks = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+  return response.json();
+};
+Handling Local Storage Example (TaskList.tsx):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ts
+Copy code
+useEffect(() => {
+  const savedTasks = localStorage.getItem('tasks');
+  if (savedTasks) {
+    setTasks(JSON.parse(savedTasks));
+  } else {
+    fetchInitialTasks();
+  }
+}, []);
+Clean Code Practices
+Modular Components: Each component handles a single responsibility.
+TypeScript Interfaces: Defined types for tasks to ensure type safety.
+Error Handling: Catch blocks for API calls.
+State Management: Controlled with React hooks.
+Testing (Optional)
+If you want to test components:
 
-## Deploy on Vercel
+Install Jest or React Testing Library:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+bash
+Copy code
+npm install @testing-library/react jest --save-dev
+Write tests for:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Adding a task.
+Editing a task.
+Deleting a task.
+Known Issues & Limitations
+JSONPlaceholder API only returns mock data (changes aren’t persisted on the API).
+No pagination: Only the first 10 tasks are shown (can be extended).
+Future Improvements
+Add pagination to handle more tasks efficiently.
+Implement better styling using CSS frameworks like Tailwind or Bootstrap.
+Add form validation with more detailed error handling.
+Contributing
+Fork the repository.
+Create a new branch:
+bash
+Copy code
+git checkout -b feature/your-feature-name
+Make your changes and commit:
+bash
+Copy code
+git commit -m "Add your message"
+Push the changes:
+bash
+Copy code
+git push origin feature/your-feature-name
+Open a pull request.
+License
+This project is licensed under the MIT License.
+
+Contact
+For any inquiries or suggestions, feel free to reach out!
+Author: Daniel Ifeoluwa Obisanya

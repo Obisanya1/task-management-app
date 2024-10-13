@@ -63,6 +63,13 @@ const handleShowTasks = async () => {
     setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task))); // Update the task in the local state
     setEditingTask(null); // Reset editing mode
   };
+
+   // Handle deleting a task
+   const handleTaskDeleted = (taskId: number) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Update local storage
+  };
   
   return <>
 <main className="flex flex-col gap-5 justify-center items-center mb-10">
@@ -78,7 +85,7 @@ const handleShowTasks = async () => {
             </li>
           ))} */}
           {tasks.map(task => (
-            <li key={task.id} className="bg-slate-400 mt-5 p-5 w-60 gap-5 h-80 ml-5 mr-5 rounded-xl">
+            <li key={task.id} className="bg-white border-2 h-fit mt-5 p-5 w-60 gap-5 h-80 ml-5 mr-5 rounded-xl">
               {/* Show either the edit form or the task details */}
               {editingTask && editingTask.id === task.id ? (
                 <EditTaskForm
@@ -90,8 +97,11 @@ const handleShowTasks = async () => {
                 <div className="flex flex-col gap-5">
                   <h1 className="font-extrabold text-2xl">Task Details</h1>
                   <h3 className="font-semibold">Task : <span className="font-medium">{task.title}</span></h3> <br/> 
-                  <h3 className="font-semibold">Status : <span className="bg-green-600 text-white p-3 rounded">{task.completed ? 'Completed' : 'Incomplete'}</span></h3>
+                  <h3 className="font-semibold">Status : <span className=" text-black p-3 rounded">{task.completed ? 'Completed' : 'Incomplete'}</span></h3>
                   <button onClick={() => setEditingTask(task)} className="bg-blue-900 text-white p-3 rounded-xl">Edit Task</button>
+                  <button onClick={() => handleTaskDeleted(task.id) } className="bg-red-900 text-white p-3 rounded-xl">
+                    Delete Task
+                  </button>
                 </div>
               )}
             </li>

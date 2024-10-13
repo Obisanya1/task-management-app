@@ -27,6 +27,7 @@ export default function EditTaskForm({ task, onTaskUpdated, onCancel }: EditTask
       setIsSubmitting(false); // Reset form submitting state
     }
   };
+  
 
   return (
     <div className='flex flex-col gap-10 justify-center items-center'>
@@ -40,7 +41,7 @@ export default function EditTaskForm({ task, onTaskUpdated, onCancel }: EditTask
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             disabled={isSubmitting}
-            className='rounded border-black p-3'
+            className='rounded border-2 border-black p-3'
           />
         </div>
 

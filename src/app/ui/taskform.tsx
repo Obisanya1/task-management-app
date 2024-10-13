@@ -29,6 +29,7 @@ export default function AddTaskForm({ onTaskAdded }: AddTaskFormProps) {
     }
   };
 
+
   return (
     <form onSubmit={handleAddTask}>
       {/* Input for task title */}
