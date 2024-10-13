@@ -33,6 +33,7 @@ export default function AddTaskForm({ onTaskAdded }: AddTaskFormProps) {
   return (
     <form onSubmit={handleAddTask}>
       {/* Input for task title */}
+      <h3 className='font-bold'>Add Task Here</h3>
       <div className='flex flex-row gap-3 items-center'>
         <label>Task Title:</label>
         <input
