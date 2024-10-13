@@ -85,7 +85,7 @@ const handleShowTasks = async () => {
             </li>
           ))} */}
           {tasks.map(task => (
-            <li key={task.id} className="bg-white border-2 h-fit mt-5 p-5 w-60 gap-5 h-80 ml-5 mr-5 rounded-xl">
+            <li key={task.id} className="bg-white border-2 h-fit mt-5 p-5 w-60 gap-5  ml-5 mr-5 rounded-xl">
               {/* Show either the edit form or the task details */}
               {editingTask && editingTask.id === task.id ? (
                 <EditTaskForm
